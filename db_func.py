@@ -24,7 +24,6 @@ def update_list(conn, list_of_flats):
     for title in list_of_flats:
         cur.execute("SELECT * FROM flats WHERE title=?", (title[0],))
         rows = cur.fetchall()
-        print(rows, title)
         if not len(rows):
             result_list.append(title)
 
@@ -34,8 +33,17 @@ def update_list(conn, list_of_flats):
 def input_new_titles(conn, list_of_flats):
     cur = conn.cursor()
 
-    # for title in list_of_flats:
-    #     cur.execute("INSERT INTO flats (title) VALUES (?)", (title,))
-    #     conn.commit()
-    cur.executemany("INSERT INTO flats VALUES (?)", list_of_flats)
-    conn.commit()
+    sql = ''' INSERT INTO flats(title, flats_id)
+              VALUES(?, ?) '''
+    for flat in list_of_flats:
+        cur.execute(sql, (flat['url'], flat['object_id']))
+        conn.commit()
+
+
+def search_by_id(conn, flats_id):
+    cur = conn.cursor()
+
+    cur.execute("SELECT title FROM flats WHERE flats_id=?", (flats_id,))
+    rows = cur.fetchall()
+
+    return rows
