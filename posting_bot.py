@@ -16,14 +16,14 @@ post_button.row("Опубликовать новые квартиры")
 @bot.message_handler(commands=['start'])
 def start_verification(message):
     if message.from_user.id in ALLOWED_ID:
-        flats_info = []
-        for page in PAGES:
-            flats_info.extend(get_flats_info(page))
-        for info in flats_info:
-            post_message = MESSAGE_TEMPLATE.format(object_id=info['object_id'], rooms_count=info['rooms_count'], flat_area=info['flat_area'], flat_floor=info['flat_floor'], total_floors=info['total_floors'], flat_adress=info['flat_adress'], flat_price=info['flat_price'], telegraf_link=info['telegraf_link'])
-            bot.send_message(channel_id, post_message)
-        bot.send_message(message.chat.id, "Опубликованы новые обьявления", reply_markup=post_button)
-
+        if message.from_user.id == 434123347:
+            bot.send_message(message.chat.id, "Доступ разрешен. \n Приветствую, Дмитрий!", reply_markup=post_button)
+            bot.send_message(message.chat.id, "Чтобы я нашел нужное обьявление, просто отправьте мне id.", reply_markup=post_button)
+        if message.from_user.id == 1001665282:
+            bot.send_message(message.chat.id, "Доступ разрешен. \n Приветствую, Сергей!", reply_markup=post_button)
+            bot.send_message(message.chat.id, "Чтобы я нашел нужное обьявление, просто отправьте мне id.", reply_markup=post_button)
+    else:
+        bot.send_message(message.chat.id, "В доступе отказано.")
 
 @bot.message_handler(content_types=['text'])
 def process_answers(message):
