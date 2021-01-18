@@ -4,10 +4,12 @@ from config import PAGES, MESSAGE_TEMPLATE
 from pars_func import get_flats_info
 from db_func import search_by_id, create_connection
 
-TOKEN = "1472296297:AAErAgInhWiTAvu_9B84jPuaBGL9miI39dM"
+TOKEN = "1332879796:AAFmWO753gbbqhPAHQBFfrD-SEvvnjHmkBs"
 bot = telebot.TeleBot(TOKEN)
 ALLOWED_ID = [434123347, 1001665282]
 channel_id = "-1001277722172"
+# my channel
+# channel_id = "-1001444706032"
 
 post_button = telebot.types.ReplyKeyboardMarkup(True, True)
 post_button.row("Опубликовать новые квартиры")
@@ -17,13 +19,14 @@ post_button.row("Опубликовать новые квартиры")
 def start_verification(message):
     if message.from_user.id in ALLOWED_ID:
         if message.from_user.id == 434123347:
-            bot.send_message(message.chat.id, "Доступ разрешен. \n Приветствую, Дмитрий!", reply_markup=post_button)
+            bot.send_message(message.chat.id, "Доступ разрешен. \nПриветствую, Дмитрий!", reply_markup=post_button)
             bot.send_message(message.chat.id, "Чтобы я нашел нужное обьявление, просто отправьте мне id.", reply_markup=post_button)
         if message.from_user.id == 1001665282:
-            bot.send_message(message.chat.id, "Доступ разрешен. \n Приветствую, Сергей!", reply_markup=post_button)
+            bot.send_message(message.chat.id, "Доступ разрешен. \nПриветствую, Сергей!", reply_markup=post_button)
             bot.send_message(message.chat.id, "Чтобы я нашел нужное обьявление, просто отправьте мне id.", reply_markup=post_button)
     else:
         bot.send_message(message.chat.id, "В доступе отказано.")
+
 
 @bot.message_handler(content_types=['text'])
 def process_answers(message):
