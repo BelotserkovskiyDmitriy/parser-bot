@@ -37,7 +37,7 @@ def input_new_titles(conn, list_of_flats):
               VALUES(?, ?) '''
     for flat in list_of_flats:
         cur.execute(sql, (flat['url'], flat['object_id']))
-        conn.commit()
+    conn.commit()
 
 
 def search_by_id(conn, flats_id):
