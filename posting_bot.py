@@ -7,9 +7,9 @@ from db_func import search_by_id, create_connection
 TOKEN = "1332879796:AAFmWO753gbbqhPAHQBFfrD-SEvvnjHmkBs"
 bot = telebot.TeleBot(TOKEN)
 ALLOWED_ID = [434123347, 1001665282]
-channel_id = "-1001277722172"
+# channel_id = "-1001277722172"
 # my channel
-# channel_id = "-1001444706032"
+channel_id = "-1001467322816"
 
 post_button = telebot.types.ReplyKeyboardMarkup(True, True)
 post_button.row("Опубликовать новые квартиры")

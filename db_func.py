@@ -21,11 +21,11 @@ def create_connection(db_file):
 def update_list(conn, list_of_flats):
     cur = conn.cursor()
     result_list = []
-    for title in list_of_flats:
-        cur.execute("SELECT title FROM flats WHERE title=?", (title[0],))
+    for item in list_of_flats:
+        cur.execute("SELECT title FROM flats WHERE title=?", (item[0],))
         rows = cur.fetchall()
         if not len(rows):
-            result_list.append(title)
+            result_list.append(item)
 
     return result_list
 
