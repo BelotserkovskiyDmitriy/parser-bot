@@ -22,7 +22,7 @@ def update_list(conn, list_of_flats):
     cur = conn.cursor()
     result_list = []
     for item in list_of_flats:
-        cur.execute("SELECT title FROM flats WHERE title=?", (item[0],))
+        cur.execute("SELECT title FROM flats WHERE title LIKE ?;", (item,))
         rows = cur.fetchall()
         if not len(rows):
             result_list.append(item)
@@ -47,3 +47,7 @@ def search_by_id(conn, flats_id):
     rows = cur.fetchall()
 
     return rows
+
+# test_list = ["https://www.olx.ua/obyavlenie/sdam-2k-kv-novostroy-metro-botanicheskiy-sad-kapremont-68m2-IDJUZ26.html#50d889f15c", "https://www.olx.ua/obyavlenie/sdam-1-k-kvartiru-v-novostroe-m-hol-gora-IDKq3PI.html#1d60e24d37"]
+# conn = create_connection("flats_olx.db")
+# print(update_list(conn, test_list))
