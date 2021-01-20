@@ -34,7 +34,7 @@ def input_new_titles(conn, list_of_flats):
     cur = conn.cursor()
 
     sql = ''' INSERT INTO flats(title, flats_id)
-              VALUES(?, ?) '''
+              VALUES(?, ?); '''
     for flat in list_of_flats:
         cur.execute(sql, (flat['url'], flat['object_id']))
     conn.commit()
