@@ -22,7 +22,7 @@ def update_list(conn, list_of_flats):
     cur = conn.cursor()
     result_list = []
     for item in list_of_flats:
-        cur.execute("SELECT title FROM flats WHERE title LIKE ?;", (item,))
+        cur.execute("SELECT title FROM flats WHERE title =?;", (item,))
         rows = cur.fetchall()
         if not len(rows):
             result_list.append(item)
@@ -43,7 +43,7 @@ def input_new_titles(conn, list_of_flats):
 def search_by_id(conn, flats_id):
     cur = conn.cursor()
 
-    cur.execute("SELECT title FROM flats WHERE flats_id=?", (flats_id,))
+    cur.execute("SELECT title FROM flats WHERE flats_id=?;", (flats_id,))
     rows = cur.fetchall()
 
     return rows
