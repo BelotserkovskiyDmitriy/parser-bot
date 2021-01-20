@@ -48,6 +48,6 @@ def search_by_id(conn, flats_id):
 
     return rows
 
-# test_list = ["https://www.olx.ua/obyavlenie/sdam-2k-kv-novostroy-metro-botanicheskiy-sad-kapremont-68m2-IDJUZ26.html#50d889f15c", "https://www.olx.ua/obyavlenie/sdam-1-k-kvartiru-v-novostroe-m-hol-gora-IDKq3PI.html#1d60e24d37"]
+# test_list = ["https://www.olx.ua/obyavlenie/sdam-2k-kv-novostroy-metro-botanicheskiy-sad-kapremont-68m2-IDJUZ26.html#50d889f15c", "https://www.olx.ua/obyavlenie/sdam-2-komnatnuyu-kvartiru-novostroy-pr-nauki650-IDKmrr0.html#b43a2441f0"]
 # conn = create_connection("flats_olx.db")
 # print(update_list(conn, test_list))
