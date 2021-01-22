@@ -5,11 +5,12 @@ from pars_func import get_flats_info
 from db_func import search_by_id, create_connection
 
 TOKEN = "1332879796:AAFmWO753gbbqhPAHQBFfrD-SEvvnjHmkBs"
+# TEST_TOKEN = "1267394232:AAFnVmOkSeAQgKpAVbWryxo2UC2wdNzU0MU"
 bot = telebot.TeleBot(TOKEN)
 ALLOWED_ID = [434123347, 1001665282]
-# channel_id = "-1001277722172"
+channel_id = "-1001277722172"
 # my channel
-channel_id = "-1001467322816"
+# channel_id = "-1001467322816"
 
 post_button = telebot.types.ReplyKeyboardMarkup(True, True)
 post_button.row("Опубликовать новые квартиры")
@@ -35,13 +36,19 @@ def process_answers(message):
         for page in PAGES:
             flats_info.extend(get_flats_info(page))
         for info in flats_info:
-            post_message = MESSAGE_TEMPLATE.format(object_id=info['object_id'], rooms_count=info['rooms_count'], flat_area=info['flat_area'], flat_floor=info['flat_floor'], total_floors=info['total_floors'], flat_adress=info['flat_adress'], flat_price=info['flat_price'], telegraf_link=info['telegraf_link'])
+            if info:
+                post_message = MESSAGE_TEMPLATE.format(object_id=info['object_id'], rooms_count=info['rooms_count'], flat_area=info['flat_area'], flat_floor=info['flat_floor'], total_floors=info['total_floors'], flat_adress=info['flat_adress'], flat_price=info['flat_price'], telegraf_link=info['telegraf_link'])
+            else:
+                post_message = "Ничего не найдено"
+                print("in else")
             bot.send_message(channel_id, post_message)
         bot.send_message(message.chat.id, "Опубликованы новые обьявления", reply_markup=post_button)
 
-    if message.from_user.id in ALLOWED_ID:
+    if message.from_user.id in ALLOWED_ID and not "Опубликовать новые квартиры" in message.text:
         con = create_connection("flats_olx.db")
         link = search_by_id(con, message.text)
+        if not link:
+            link = "Обьект в базе не найден"
         bot.send_message(message.chat.id, link, reply_markup=post_button)
 
 

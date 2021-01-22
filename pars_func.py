@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from db_func import create_connection, update_list, input_new_titles
+from db_func import create_connection, input_new_titles
 from headlines import get_headlines
 
 
@@ -27,14 +27,15 @@ def get_flats_info(url):
     # and add in DB new links
 
     db_connection = create_connection(db_file)
-    actual_list = update_list(db_connection, list_of_novostroys)
 
     # Get headers from all novostroys
-    flats_info = get_headlines(actual_list)
+    flats_info = get_headlines(list_of_novostroys)
 
-    input_new_titles(db_connection, flats_info)
+    # actual_list = update_list(list_of_novostroys)
+    unique_flats = input_new_titles(db_connection, flats_info)
+    db_connection.close()
 
-    return flats_info
+    return unique_flats
 
 
 # search_title('https://www.olx.ua/nedvizhimost/kvartiry-komnaty/arenda-kvartir-komnat/kharkov/')
